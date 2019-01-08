@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<title></title>
+		<script src="../js/phone.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			div,span,p{
+				font-family: PingFangSC-Medium;
+			}
+			div{
+				width: 92%;
+				margin: 0 auto;
+			}
+			.title {
+				font-size: calc( .3rem/2);
+				color: #333333;
+				padding:0.15rem 0 ;
+				line-height: .21rem;
+				text-align: center;
+			}
+			.look{
+				display: flex;
+				justify-content: space-between;
+			}
+			.look span{
+				line-height: .15rem;
+				color: #999999;
+				letter-spacing: 0;
+			}
+			.box img{
+				position: relative;
+				width: 100%;
+				border-radius: 3px;
+				margin: .05rem 0;
+			}
+			.box {
+				font-size: calc( 0.28rem/2);
+				font-family: PingFangSC-Regular;
+				color: #777777;
+				letter-spacing: 0;
+				text-align: justify;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="title"></div>
+		<div class="look"><span class="time" style="font-size: .11rem;">2018-04-08</span><span class="Look_num" style="font-size: .13rem;">236</span></div>
+		<div style="background: #e8e8e8;height: 1px;width: 100%;margin: .1rem 0;"></div>
+		<div class="box">
+		</div>
+	</body>
+	<script src="../js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			$(function(){
+
+			$.ajax({
+				type:"post",
+				url:"http://webloan-api.weiyingjia.org/site/newview",
+				async:true,
+				 contentType:"application/x-www-form-urlencoded",
+				data:{
+					id:3
+				},
+				success:function(cb){
+					console.log(JSON.parse(cb))
+					$('.title').html(JSON.parse(cb).arr.title)
+					$('.time').html('媒体来源：聚有鱼     '+JSON.parse(cb).arr.addtime)
+					$('.Look_num').html(JSON.parse(cb).arr.browse_num)
+					$('.box').html(JSON.parse(cb).arr.news_content)
+				},
+				error:function(err){
+					console.log(err)
+				}
+			});
+		})
+	</script>
+</html>
